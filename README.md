@@ -1,5 +1,16 @@
 <h1 align="center">ProjectBish UserBot</h1>
-<p><a href="https://github.com/BianSepang/ProjectBish/workflows/BugChecker/badge.svg?branch=master"> <img src="https://github.com/BianSepang/ProjectBish/workflows/BugChecker/badge.svg?branch=master" alt="bug_checker" /></a></p>
+<p align="center">
+    <a href="https://github.com/BianSepang/ProjectBish/actions?query=PEP8"> <img src="https://github.com/BianSepang/ProjectBish/workflows/PEP8/badge.svg?branch=master" alt="PEP8" /></a>
+    <a href="https://github.styleci.io/repos/261118126?branch=master"><img src="https://github.styleci.io/repos/263736411/shield?branch=master" alt="StyleCI"></a><br>
+    <a href="https://app.codacy.com/manual/BianSepang/ProjectBish/dashboard"> <img src="https://img.shields.io/codacy/grade/bb2a5a151ff84686a2f7b87ea9e75a85?color=blue&logo=codacy&style=flat-square" alt="Codacy" /></a>
+    <a href="https://github.com/BianSepang/ProjectBish"> <img src="https://img.shields.io/github/repo-size/BianSepang/ProjectBish?logo=github&style=flat-square" /></a>
+    <a href="https://github.com/BianSepang/ProjectBish/graphs/contributors"> <img src="https://img.shields.io/github/contributors-anon/BianSepang/ProjectBish?color=blue&label=all%20contributors&logo=github&style=flat-square" /></a>
+    <a href="https://github.com/BianSepang/ProjectBish/commits/master"> <img src="https://img.shields.io/github/last-commit/BianSepang/ProjectBish?color=blue&logo=github&style=flat-square" /></a>
+    <a href="https://github.com/BianSepang/ProjectBish/network/members"> <img src="https://img.shields.io/github/forks/BianSepang/ProjectBish?logo=github&style=flat-square" /></a>
+    <a href="https://hub.docker.com/r/biansepang/p-bish"> <img src="https://img.shields.io/docker/image-size/biansepang/p-bish/groovy?label=docker%20image%20size&logo=docker&style=flat-square" /></a>
+    <a href="https://hub.docker.com/r/biansepang/p-bish/tags"> <img src="https://img.shields.io/docker/v/biansepang/p-bish/groovy?label=docker%20version&logo=docker&style=flat-square" /></a>
+    <a href="https://pypi.org/project/Telethon/"> <img src="https://img.shields.io/pypi/v/telethon?label=telethon&logo=pypi&logoColor=white&style=flat-square" /></a>
+</p>    
 <h3 align="center">A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.</h3>
 <h4 align="center">Based on RaphielGang's <a href="https://github.com/RaphielGang/Telegram-UserBot">Paperplane</a> Telegram userbot...</h4>
 <p align="center"><a href="#how-to-host">How To Host</a> | <a href="#credits">Credits</a> | <a href="#setting-up-google-drive">Setting up Google Drive</a> | <a href="#license">License</a></p>
@@ -21,3 +32,4 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
 <p align="center"><a href="https://github.com/adekmaulana/ProjectBish/blob/master/LICENSE">Raphielscape Public License</a> - Version 1.c, June 2019</p>
+    
