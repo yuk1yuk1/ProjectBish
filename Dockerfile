@@ -1,77 +1,17 @@
-# We're using Alpine Edge
-FROM alpine:edge
+FROM zainarbani/dockerub:one4u-alpine
+
+RUN mkdir /ProjectBish && chmod 777 /ProjectBish
+ENV PATH="/ProjectBish/bin:$PATH"
+WORKDIR /ProjectBish
+
+RUN git clone https://github.com/BianSepang/ProjectBish -b experimentals-pb /ProjectBish
 
 #
-# We have to uncomment Community repo for some packages
+# Copies session and config(if it exists)
 #
-RUN sed -e 's;^#http\(.*\)/edge/community;http\1/edge/community;g' -i /etc/apk/repositories
+COPY ./sample_config.env ./userbot.session* ./config.env* /ProjectBish/
 
 #
-# Installing Packages
+# Finalization
 #
-RUN apk add --no-cache=true --update \
-    coreutils \
-    bash \
-    build-base \
-    bzip2-dev \
-    curl \
-    figlet \
-    gcc \
-    g++ \
-    git \
-    aria2 \
-    util-linux \
-    libevent \
-    jpeg-dev \
-    libffi-dev \
-    libpq \
-    libwebp-dev \
-    libxml2 \
-    libxml2-dev \
-    libxslt-dev \
-    linux-headers \
-    musl \
-    neofetch \
-    openssl-dev \
-    postgresql \
-    postgresql-client \
-    postgresql-dev \
-    openssl \
-    pv \
-    jq \
-    wget \
-    python3 \
-    python3-dev \
-    readline-dev \
-    sqlite \
-    ffmpeg \
-    sqlite-dev \
-    sudo \
-    chromium \
-    chromium-chromedriver \
-    zlib-dev \
-    jpeg \
-    zip \
-    freetype-dev
-
-RUN python3 -m ensurepip \
-    && pip3 install --upgrade pip setuptools \
-    && pip3 install wheel \
-    && rm -r /usr/lib/python*/ensurepip && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
-
-#
-# Clone repo and prepare working directory
-#
-RUN git clone -b experimentals-pb https://github.com/BianSepang/ProjectBish /home/projectbish/
-RUN mkdir /home/projectbish/bin/
-WORKDIR /home/projectbish/
-
-#
-# Install requirements
-#
-RUN pip3 install -r requirements.txt
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 CMD ["python3","-m","userbot"]
