@@ -152,17 +152,14 @@ else:
     lastfm = None
 
 # Google Drive Module
-G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA", None)
-G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
-G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
-G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA", None)
-G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID", None)
-TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
-                                         "./downloads")
-                                         
-# Zipfile module
+G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA") or None
+G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID") or None
+G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET") or None
+G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA") or None
+G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID") or None
+TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY") or "/ProjectBish/.bin"
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY",
-                                         "./zips")                                         
+                                         "/ProjectBish/.zips")
 
 # Terminal Alias
 TERM_ALIAS = os.environ.get("TERM_ALIAS", None)
