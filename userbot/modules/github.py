@@ -108,12 +108,12 @@ async def git_commit(file_name,mone):
         print(content_file)
     for i in content_list:
         create_file = True
-        if i == 'ContentFile(path="'+file_name+'")':
-            return await mone.edit("`File Already Exists`")
+        if i == 'ContentFile(path="' + file_name + '")':
             create_file = False
-    file_name = "userbot/modules/" + file_name		
-    if create_file == True:
-        file_name = file_name.replace("./userbot/temp/","")
+            return await mone.edit("`File Already Exists`")
+    file_name = "userbot/modules/" + file_name
+    if create_file:
+        file_name = file_name.replace("./userbot/temp/", "")
         print(file_name)
         try:
             repo.create_file(file_name, "ProjectBish: add new module", commit_data, branch="master")

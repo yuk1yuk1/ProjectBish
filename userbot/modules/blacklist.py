@@ -10,9 +10,8 @@ import asyncio
 import io
 import re
 import userbot.modules.sql_helper.blacklist_sql as sql
-from telethon import events, utils
-from telethon.tl import types, functions
-from userbot import CMD_HELP, bot
+from asyncio import sleep
+from userbot import CMD_HELP
 from userbot.events import register
 
 
@@ -29,7 +28,7 @@ async def on_new_message(event):
             except Exception as e:
                 await event.reply("I do not have DELETE permission in this chat")
                 await sleep(1)
-                await reply.delete()
+                await event.delete()
                 sql.rm_from_blacklist(event.chat_id, snip.lower())
             break
         pass
