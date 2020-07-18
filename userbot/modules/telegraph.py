@@ -6,7 +6,7 @@ from userbot import (TEMP_DOWNLOAD_DIRECTORY, CMD_HELP, bot)
 from userbot.events import register
 
 telegraph = Telegraph()
-r = telegraph.create_account(short_name=TELEGRAPH_SHORT_NAME)
+r = telegraph.create_account(short_name="telegraph")
 auth_url = r["auth_url"]
 
 
