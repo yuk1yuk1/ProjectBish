@@ -97,11 +97,11 @@ async def remove_a_filter(r_handler):
             "`Filter`  **{}**  `was deleted successfully`.".format(filt))
 
 
-@register(outgoing=True, pattern="^\.rmbotfilters (.*)")
+@register(outgoing=True, pattern=r"^\.rmbotfilters (.*)")
 async def kick_marie_filter(event):
     """ For .rmfilters command, allows you to kick all \
         Marie(or her clones) filters from a chat. """
-    cmd = event.text[0]
+    event.text[0]
     bot_type = event.pattern_match.group(1).lower()
     if bot_type not in ["marie", "rose"]:
         return await event.edit("`That bot is not yet supported!`")
@@ -123,7 +123,7 @@ async def kick_marie_filter(event):
             BOTLOG_CHATID, "I cleaned all filters at " + str(event.chat_id))
 
 
-@register(outgoing=True, pattern="^\.filters$")
+@register(outgoing=True, pattern=r"^\.filters$")
 async def filters_active(event):
     """ For .filters command, lists all of the active filters in a chat. """
     try:

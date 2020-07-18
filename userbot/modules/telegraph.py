@@ -10,11 +10,12 @@ r = telegraph.create_account(short_name=TELEGRAPH_SHORT_NAME)
 auth_url = r["auth_url"]
 
 
-@register(outgoing=True, pattern="^\.tg (media|text)$")
+@register(outgoing=True, pattern=r"^\.tg (media|text)$")
 async def telegraphs(graph):
     """ For .telegraph command, upload media & text to telegraph site. """
     await graph.edit("`Processing...`")
-    if not graph.text[0].isalpha() and graph.text[0] not in ("/", "#", "@", "!"):
+    if not graph.text[0].isalpha() and graph.text[0] not in (
+            "/", "#", "@", "!"):
         if graph.fwd_from:
             return
         if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):

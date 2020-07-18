@@ -1,12 +1,12 @@
-#this module original created by @spechide
-#port to userbot by @afdulfauzan
+# this module original created by @spechide
+# port to userbot by @afdulfauzan
 
-from telethon.tl import functions, types
+from telethon.tl import functions
 from userbot.events import register
 from userbot import CMD_HELP
 
 
-@register(outgoing=True, pattern="^\.create (b|g|c)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.create (b|g|c)(?: |$)(.*)")
 async def telegraphs(grop):
     """ For .create command, Creating New Group & Channel """
     if not grop.text[0].isalpha() and grop.text[0] not in ("/", "#", "@", "!"):

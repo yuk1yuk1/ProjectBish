@@ -25,7 +25,7 @@ DEVICES_DATA = ('https://raw.githubusercontent.com/androidtrackers/'
                 'certified-android-devices/master/by_device.json')
 
 
-@register(outgoing=True, pattern="^\.magisk$")
+@register(outgoing=True, pattern=r"^\.magisk$")
 async def magisk(request):
     """ magisk latest releases """
     magisk_dict = {
@@ -102,14 +102,14 @@ async def codename_info(request):
             codename = item['device']
             model = item['model']
             reply += f'{brand} {name}\n' \
-               f'**Codename**: `{codename}`\n' \
+                f'**Codename**: `{codename}`\n' \
                 f'**Model**: {model}\n\n'
     else:
         reply = f"`Couldn't find {device} codename!`\n"
     await request.edit(reply)
 
 
-@register(outgoing=True, pattern="^\.pixeldl(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pixeldl(?: |$)(.*)")
 async def download_api(dl):
     await dl.edit("`Collecting information...`")
     URL = dl.pattern_match.group(1)
@@ -193,7 +193,7 @@ async def download_api(dl):
             f"`ETA` -> {time_formatter(eta)}"
         )
         if round(diff % 15.00) == 0 and display_message != current_message or (
-          downloaded == file_size):
+                downloaded == file_size):
             await dl.edit(current_message)
             display_message = current_message
         if downloaded == file_size:

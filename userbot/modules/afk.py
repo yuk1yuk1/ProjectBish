@@ -9,8 +9,7 @@
 
 from datetime import datetime
 import time
-from random import choice, randint
-from asyncio import sleep
+from random import randint
 
 from telethon.events import StopPropagation
 
@@ -27,10 +26,12 @@ afk_time = None
 afk_start = {}
 
 # =================================================================
-@register(outgoing=True, pattern="^\.off(?: |$)(.*)", disable_errors=True)
+
+
+@register(outgoing=True, pattern=r"^\.off(?: |$)(.*)", disable_errors=True)
 async def set_afk(afk_e):
     """ For .afk command, allows you to inform people that you are afk when they message you """
-    message = afk_e.text
+    afk_e.text
     string = afk_e.pattern_match.group(1)
     global ISAFK
     global AFKREASON
@@ -57,7 +58,7 @@ async def set_afk(afk_e):
     raise StopPropagation
 
 
-@register(outgoing=True, pattern="^\.unoff(?: |$)(.*)", disable_errors=True)
+@register(outgoing=True, pattern=r"^\.unoff(?: |$)(.*)", disable_errors=True)
 async def type_afk_is_not_true(notafk):
     """ This sets your status as not afk automatically when you write something while being afk """
     global ISAFK
@@ -238,11 +239,10 @@ async def afk_on_pm(sender):
                     COUNT_MSG = COUNT_MSG + 1
 
 
-CMD_HELP.update({
-    "afk":
-    ">`.off` [Optional Reason]"
-	"\nUsage: Sets you as afk."
-	"\nReplies to anyone who tags/PM's you telling them that you are AFK(reason)."
-	"\n\n>`.unoff`"
-	"\nUsage: Back from afk state"
-})
+CMD_HELP.update(
+    {
+        "afk": ">`.off` [Optional Reason]"
+        "\nUsage: Sets you as afk."
+        "\nReplies to anyone who tags/PM's you telling them that you are AFK(reason)."
+        "\n\n>`.unoff`"
+        "\nUsage: Back from afk state"})
