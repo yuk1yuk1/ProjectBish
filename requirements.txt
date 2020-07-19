@@ -55,3 +55,4 @@ pyfiglet
 covid
 youtube_search
 justwatch
+validators
