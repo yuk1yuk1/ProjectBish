@@ -224,7 +224,7 @@ CMD_HELP.update({
     ">`.sysd`"
     "\nUsage: Shows system information using neofetch."
     "\n\n>`.spc`"
-    "\nUsage: Show system specification.",,
+    "\nUsage: Show system specification.",
     "botver":
     ">`.botver`"
     "\nUsage: Shows the userbot version.",
