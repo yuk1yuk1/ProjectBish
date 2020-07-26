@@ -21,6 +21,7 @@ import base64
 import json
 import telethon
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from asyncio.exceptions import TimeoutError
 from telethon.tl.types import (
     DocumentAttributeFilename,
     DocumentAttributeSticker,
@@ -361,45 +362,40 @@ async def silently_send_message(conv, text):
     return response
 
 
-@register(outgoing=True, pattern=r"^\.q(?: |$)(.*)")
-async def quotess(qotli):
-    if qotli.fwd_from:
+@register(outgoing=True, pattern=r"^\.q")
+async def _(event):
+    if event.fwd_from:
         return
-    if not qotli.reply_to_msg_id:
-        await qotli.edit("```Reply to any user message.```")
-        return
-    reply_message = await qotli.get_reply_message()
+    if not event.reply_to_msg_id:
+        return await event.edit("`Reply to a text message.`")
+    reply_message = await event.get_reply_message()
     if not reply_message.text:
-        await qotli.edit("```Reply to text message```")
-        return
+        return await event.edit("`Reply to a text message.`")
     chat = "@QuotLyBot"
-    reply_message.sender
-    if reply_message.sender.bot:
-        await qotli.edit("```Reply to actual users message.```")
-        return
-    await qotli.edit("```Making a Quote```")
-    async with bot.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(
-                    incoming=True,
-                    from_users=1031952739))
-            msg = await bot.forward_messages(chat, reply_message)
-            response = await response
-            """ - don't spam notif - """
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await qotli.reply("```Please unblock @QuotLyBot and try again```")
-            return
-        if response.text.startswith("Hi!"):
-            await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
-        else:
-            await qotli.delete()
-            await bot.forward_messages(qotli.chat_id, response.message)
-            await bot.send_read_acknowledge(qotli.chat_id)
-            """ - cleanup chat after completed - """
-            await qotli.client.delete_messages(conv.chat_id,
-                                               [msg.id, response.id])
+    await event.edit("`Processing...`")
+    try:
+        async with bot.conversation(chat) as conv:
+            try:
+                response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_users=1031952739)
+                )
+                await bot.forward_messages(chat, reply_message)
+                response = await response
+                await bot.send_read_acknowledge(conv.chat_id)
+
+            except YouBlockedUserError:
+                return await event.reply("`Please unblock @QuotLyBot and try again`")
+
+            if response.text.startswith("Hi!"):
+                await event.edit(
+                    "`Can you kindly disable your forward privacy settings for good?`"
+                )
+            else:
+                await event.delete()
+                await bot.forward_messages(event.chat_id, response.message)
+
+    except TimeoutError:
+        return await event.edit("`Error: `@QuotLyBot` is not responding.`")
 
 
 @register(outgoing=True, pattern=r'^\.hz(:? |$)(.*)?')
