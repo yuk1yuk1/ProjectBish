@@ -305,8 +305,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "getmusic":
-        ">`.song` **Artist - Song Title**"
+        "getmusic": ">`.song` **Artist - Song Title**"
         "\nUsage: Finding and uploading song.\n\n"
         ">`.vsong` **Artist - Song Title**"
         "\nUsage: Finding and uploading videoclip.\n\n"
