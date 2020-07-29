@@ -14,17 +14,13 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pylast import User
 from telethon import events
-from telethon.errors import (
-    MessageEmptyError,
-    MessageNotModifiedError,
-    MessageTooLongError,
-)
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeVideo
 
 from userbot import CMD_HELP, LASTFM_USERNAME, bot, lastfm
 from userbot.events import register
 from userbot.utils import progress
+
 
 # For song module
 
@@ -33,26 +29,27 @@ def getmusic(get, DEFAULT_AUDIO_QUALITY):
     search = get
 
     headers = {
-        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
+        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+    }
 
     html = requests.get(
-        'https://www.youtube.com/results?search_query=' +
+        "https://www.youtube.com/results?search_query=" +
         search,
         headers=headers).text
-    soup = BeautifulSoup(html, 'html.parser')
-    for link in soup.find_all('a'):
-        if '/watch?v=' in link.get('href'):
+    soup = BeautifulSoup(html, "html.parser")
+    for link in soup.find_all("a"):
+        if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
-            video_link = link.get('href')
+            video_link = link.get("href")
             break
 
-        video_link = "http://www.youtube.com/" + video_link
-        command = (
-            "youtube-dl --write-thumbnail --extract-audio --audio-format mp3 --audio-quality " +
-            DEFAULT_AUDIO_QUALITY +
-            " " +
-            video_link)
-        os.system(command)
+    video_link = "http://www.youtube.com/" + video_link
+    command = (
+        "youtube-dl --write-thumbnail --extract-audio --audio-format mp3 --audio-quality " +
+        DEFAULT_AUDIO_QUALITY +
+        " " +
+        video_link)
+    os.system(command)
 
 
 # For getvideosong
@@ -308,7 +305,8 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "getmusic": ">`.song` **Artist - Song Title**"
+        "getmusic":
+        ">`.song` **Artist - Song Title**"
         "\nUsage: Finding and uploading song.\n\n"
         ">`.vsong` **Artist - Song Title**"
         "\nUsage: Finding and uploading videoclip.\n\n"
@@ -321,7 +319,4 @@ CMD_HELP.update(
         ">`.net now`"
         "\nUsage: Download current LastFM scrobble use `@WooMaiBot`.\n\n"
         ">`.sdd <Spotify/Deezer Link>`"
-        "\nUsage: Download music from Spotify or Deezer use `@MusicHuntersBot`."
-        "\n\n>`.deezload` **<spotify/deezer link> <Format>**"
-        "\nUsage: Download music from deezer."
-        "\n__Format=__ `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`."})
+        "\nUsage: Download music from Spotify or Deezer use `@MusicHuntersBot`."})
