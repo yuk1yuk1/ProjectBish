@@ -14,12 +14,15 @@ from platform import python_version, uname
 from shutil import which
 import psutil
 from telethon import __version__, version
+from git import Repo
 
-from userbot import bot, CMD_HELP, ALIVE_NAME, UPSTREAM_REPO_BRANCH, ALIVE_LOGO
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO
 from userbot.events import register
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+repo = Repo()
+modules = CMD_HELP
 # ============================================
 
 
@@ -189,11 +192,12 @@ async def pipcheck(pip):
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     logo = ALIVE_LOGO
-    output = (f"`ProjectBish` is running on `{UPSTREAM_REPO_BRANCH}`\n"
+    output = (f"`ProjectBish` is running on `{repo.active_branch.name}`\n"
               f"====================================\n"
-              f"🐍 `Python    :` v{python_version()}\n"
-              f"⚙️ `Telethon  :` v{version.__version__}\n"
-              f"👤 `User      :` {DEFAULTUSER}\n"
+              f"🐍 `Python         :` v{python_version()}\n"
+              f"⚙️ `Telethon       :` v{version.__version__}\n"
+              f"🧩 `Loaded modules :` {len(modules)}\n"
+              f"👤 `User           :` {DEFAULTUSER}\n"
               f"====================================\n")
     await bot.send_file(alive.chat_id, logo, caption=output)
     await alive.delete()
@@ -224,6 +228,7 @@ CMD_HELP.update({
     "sysd":
     ">`.sysd`"
     "\nUsage: Shows system information using neofetch."
+<<<<<<< HEAD
     "\n\n>`.spc`"
     "\nUsage: Show system specification.",
     "botver":
@@ -236,6 +241,21 @@ CMD_HELP.update({
     ">`.alive`"
     "\nUsage: Type .alive to see wether your bot is working or not."
     "\n\n>`.aliveu <text>`"
+=======
+    "\n\n`.spc`"
+    "\nUsage: Show system specification."})
+CMD_HELP.update({
+    "botver": "`.botver`"
+    "\nUsage: Shows the userbot version."})
+CMD_HELP.update({
+    "pip": "`.pip` <module(s)>"
+    "\nUsage: Does a search of pip modules(s)."})
+CMD_HELP.update({
+    "on":
+    "`.alive` | `.on`"
+    "\nUsage: See wether your bot is working or not."
+    "\n\n`.aliveu` <text>"
+>>>>>>> df24d072... system_stats: alive: add active branch and loaded modules
     "\nUsage: Changes the 'user' in alive to the text you want."
     "\n\n>`.resetalive`"
     "\nUsage: Resets the user to default."
