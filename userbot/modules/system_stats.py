@@ -228,7 +228,6 @@ CMD_HELP.update({
     "sysd":
     ">`.sysd`"
     "\nUsage: Shows system information using neofetch."
-<<<<<<< HEAD
     "\n\n>`.spc`"
     "\nUsage: Show system specification.",
     "botver":
@@ -241,21 +240,6 @@ CMD_HELP.update({
     ">`.alive`"
     "\nUsage: Type .alive to see wether your bot is working or not."
     "\n\n>`.aliveu <text>`"
-=======
-    "\n\n`.spc`"
-    "\nUsage: Show system specification."})
-CMD_HELP.update({
-    "botver": "`.botver`"
-    "\nUsage: Shows the userbot version."})
-CMD_HELP.update({
-    "pip": "`.pip` <module(s)>"
-    "\nUsage: Does a search of pip modules(s)."})
-CMD_HELP.update({
-    "on":
-    "`.alive` | `.on`"
-    "\nUsage: See wether your bot is working or not."
-    "\n\n`.aliveu` <text>"
->>>>>>> df24d072... system_stats: alive: add active branch and loaded modules
     "\nUsage: Changes the 'user' in alive to the text you want."
     "\n\n>`.resetalive`"
     "\nUsage: Resets the user to default."
