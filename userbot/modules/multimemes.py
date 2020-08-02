@@ -536,7 +536,7 @@ async def fryerrr(fry):
 @register(outgoing=True, pattern=r"^\.sg(?: |$)(.*)")
 async def lastname(steal):
     if steal.fwd_from:
-        return 
+        return
     if not steal.reply_to_msg_id:
         await steal.edit("`Reply to any user message.`")
         return
@@ -630,7 +630,7 @@ CMD_HELP.update({
 
 
 CMD_HELP.update({
-    "sangmata": 
+    "sangmata":
     "`.sg`"
     "\nUsage: Steal ur or friend name."
 })
