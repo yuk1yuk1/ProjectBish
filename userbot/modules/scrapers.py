@@ -96,7 +96,7 @@ async def carbon_api(e):
     await e.delete()  # Deleting msg
 
 
-@register(outgoing=True, pattern=r"^\.img (.*)")
+@register(outgoing=True, pattern=r"^\.img(?: |$)(\d*)? ?(.*)")
 async def img_sampler(event):
     """ For .img command, search and return images matching the query. """
     await event.edit("`Processing...`")
@@ -154,8 +154,8 @@ async def moni(event):
         return await event.edit("`Invalid syntax.`")
 
 
-@register(outgoing=True, pattern=r"^\.google (.*)")
-async def gsearch(q_event):
+@register(outgoing=True, pattern=r"^\.google(?: |$)(\d*)? ?(.*)")
+async def gsearch(event):
     """ For .google command, do a Google search. """
     match = q_event.pattern_match.group(1)
     page = findall(r"page=\d+", match)
@@ -196,9 +196,9 @@ async def setlang(wklang):
     await wklang.edit(f"Language for wikipedia set to {WIKI_LANG}")
 
 
-@register(outgoing=True, pattern=r"^\.wiki (.*)")
+@register(outgoing=True, pattern=r"^\.wiki(?: |$)(.*)")
 async def wiki(wiki_q):
-    """ For .wiki command, fetch content from Wikipedia. """
+    """For .wiki command, fetch content from Wikipedia."""
     match = wiki_q.pattern_match.group(1)
     try:
         summary(match)
@@ -219,12 +219,9 @@ async def wiki(wiki_q):
         if os.path.exists("output.txt"):
             return os.remove("output.txt")
     await wiki_q.edit("**Search:**\n`" + match + "`\n\n**Result:**\n" + result)
-    if BOTLOG:
-        await wiki_q.client.send_message(
-            BOTLOG_CHATID, f"Wiki query `{match}` was executed successfully")
 
 
-@register(outgoing=True, pattern=r"^\.ud (.*)")
+@register(outgoing=True, pattern=r"^\.ud(?: |$)(.*)")
 async def urban_dict(ud_e):
     """ For .ud command, fetch content from Urban Dictionary. """
     await ud_e.edit("Processing...")
@@ -423,7 +420,7 @@ async def translateme(trans):
 
 @register(pattern=".lang (trt|tts) (.*)", outgoing=True)
 async def lang(value):
-    """ For .lang command, change the default langauge of userbot scrapers. """
+    """For .lang command, change the default langauge of userbot scrapers."""
     util = value.pattern_match.group(1).lower()
     if util == "trt":
         scraper = "Translator"
@@ -454,9 +451,9 @@ async def lang(value):
             f"`Language for {scraper} changed to {LANG.title()}.`")
 
 
-@register(outgoing=True, pattern=r"^\.yt (\d*) *(.*)")
+@register(outgoing=True, pattern=r"^\.yt(?: |$)(\d*)? ?(.*)")
 async def yt_search(event):
-    """ For .yt command, do a YouTube search from Telegram. """
+    """For .yt command, do a YouTube search from Telegram."""
 
     if event.pattern_match.group(1) != "":
         counter = int(event.pattern_match.group(1))
@@ -499,7 +496,7 @@ async def yt_search(event):
     await event.edit(output, link_preview=False)
 
 
-@register(outgoing=True, pattern=r".rip(audio|video) (.*)")
+@register(outgoing=True, pattern=r"^\.rip(audio|video)(?: |$)(.*)")
 async def download_video(v_url):
     """ For .rip command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
