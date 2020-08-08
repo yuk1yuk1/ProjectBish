@@ -193,14 +193,22 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     logo = ALIVE_LOGO
     output = (f"`ProjectBish` is running on `{repo.active_branch.name}`\n"
-              f"====================================\n"
+              "`====================================`\n"
               f"🐍 `Python         :` v{python_version()}\n"
               f"⚙️ `Telethon       :` v{version.__version__}\n"
               f"🧩 `Loaded modules :` {len(modules)}\n"
               f"👤 `User           :` {DEFAULTUSER}\n"
-              f"====================================\n")
-    await bot.send_file(alive.chat_id, logo, caption=output)
-    await alive.delete()
+              "`====================================`\n")
+    if ALIVE_LOGO:
+        try:
+            logo = ALIVE_LOGO
+            await bot.send_file(alive.chat_id, logo, caption=output)
+            await alive.delete()
+        except BaseException:
+            await alive.edit(output + "\n\n *`The provided logo is invalid."
+                             "\nMake sure the link is directed to the logo picture`")
+    else:
+        await alive.edit(output)
 
 
 @register(outgoing=True, pattern=r"^\.aliveu")
