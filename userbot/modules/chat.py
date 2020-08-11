@@ -18,10 +18,7 @@ from telethon.tl.types import MessageActionChannelMigrateFrom, ChannelParticipan
 from telethon.errors import (
     ChannelInvalidError,
     ChannelPrivateError,
-    ChannelPublicGroupNaError,
-    InviteHashEmptyError,
-    InviteHashExpiredError,
-    InviteHashInvalidError)
+    ChannelPublicGroupNaError)
 from telethon.utils import get_input_location
 
 
