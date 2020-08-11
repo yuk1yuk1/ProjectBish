@@ -1,5 +1,5 @@
 # Using Groovy
-FROM biansepang/p-bish:latest
+FROM biansepang/p-bish:groovy
 
 # Clone repo and prepare working directory
 RUN git clone -b experimental https://github.com/BianSepang/ProjectBish /home/projectbish/
